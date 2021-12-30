@@ -21,10 +21,10 @@ There is a solution to this problem and the trick lies in normalizing the inputs
 ## The Deep Residual Framework
 
 As mentioned earlier, the deep residual learning framework allows the layers to learn the identity function. Say, the layers need to learn the function $H(x)$, which is evidently defined by $H(x) = x$ ideally. The layers learn a certain function, which is described by $F(x)$. The $x$ which is passed as input, is then added to $F(x)$, thus making it $F(x)+x$ before passing it onto the activation function, as shown in Figure 2. 
+<p align="center">
+<img width="706" height="624"  src="images/fig2.png")
 
-![Figure 2](./images/fig2.png "Fig 1. Visual Representation of the layers")
-
-<p align="center">Fig 2. The blocks which implement residual learning</p>
+Fig 2. The blocks which implement residual learning</p>
 
 
 Thus, $H(x)$ comes out to be: $H(x) = F(x) + x$. $F(x)$, which is generally referred to as the residue is mathematically represented as $F(x) = H(x) - x$. 
