@@ -1,5 +1,9 @@
 # Deep Residual Networks: Notes and Implementation 
+This readme contains notes and my intuitions of the paper "Deep Residual Learning for Image Recognition" by Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun of Microsoft Research.
 
+This link redirects to the [original paper](https://arxiv.org/pdf/1512.03385.pdf). 
+
+## Introduction
 The main aim of this paper is to ease the training of neural networks, which are substantially deeper, even going up to 1000 layers. 
 
 Say there is a network, which performs quite well on the chosen performance measure. If we add a few more layers at the end of that network, which represent the Identity function(f(x)=x). So, the performance of this new network should not differ much from the original network as the layers added give out the same output as the input fed to them. Hence a deeper model should have training error no greater than its shallower counterpart.  Figure 1 shows this representation.  
@@ -63,10 +67,13 @@ So, it does not change the height or width of the input. But, depending on the n
 ## Bottleneck Blocks
 Bottleneck blocks take advantage of 1X1 Convolutions. Quoting from the original paper, which is quite self explanatory: 
 
-``` 
-Because of concerns on the training time that we can afford, we modify the building block as a bottleneck design. For each residual function F, we use a stack of 3 layers instead of 2. The three layers
+
+>Because of concerns on the training time that we can afford, we modify the building block as a bottleneck design. For each residual function F, we use a stack of 3 layers instead of 2. The three layers
 are 1×1, 3×3, and 1×1 convolutions, where the 1×1 layers are responsible for reducing and then increasing (restoring) dimensions, leaving the 3×3 layer a bottleneck with smaller input/output dimensions. 
-```
+
 
 The figure above shows a bottleneck block. Deeper non-bottleneck ResNets show an increase in performance due to the increased depth, but they won't be as economical as the bottleneck blocks. 
+
+## Results
+This paper was one of the groundbreaking papers which set a lot of standards in the field of computer vision. As for results, it has a lot of accolades, one of which is winning the ImageNet Competition ILSVRC 2015 with an error of 3.57% on the test set. 
 
