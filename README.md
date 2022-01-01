@@ -25,6 +25,9 @@ Overfitting occurs when our network tends to "learn" the training data, and henc
 
 Degradation, however is a different issue. It refers to the drop in performance, or the increase in error in deeper network, as compared to shallower ones. The two graphs in the figure below helps distinguish between overfitting and degradation. 
 
+![Figure 2](./images/fig3.png "Fig 2. Overfitting vs Degradation")
+<p align="center">Fig 2. Overfitting vs Degradation</p>
+
 This problem of degradation implies that not all networks are similarly easy to optimize. Now, let's go back to the first idea of adding layers which map the identity function. If the added layers can
 be constructed as identity mappings, a deeper model should
 have training error no greater than its shallower counterpart. And thus, here comes the importance of the Deep Residual Framework, which helps us implement this. 
@@ -35,9 +38,9 @@ Here, another important fact comes up: It is easier for models or layers to lear
 
 As mentioned earlier, the deep residual learning framework allows the layers to learn the identity function. Say, the layers need to learn the function H(x), which is evidently defined by H(x) = x ideally. The layers learn a certain function, which is described by F(x). The x which is passed as input, is then added to F(x), thus making it F(x)+x before passing it onto the activation function, as shown in Figure 2. 
 <p align="center">
-<img width="706" height="624"  src="images/fig2.png")
+<img width="706" height="624"  src="images/fig2.png") </p>
 
-Fig 2. The blocks which implement residual learning</p>
+<p align="center">Fig 3. The blocks which implement residual learning</p>
 
 
 Thus, H(x) comes out to be: H(x) = F(x) + x. F(x), which is generally referred to as the residue is mathematically represented as F(x) = H(x) - x. 
@@ -45,3 +48,25 @@ Thus, H(x) comes out to be: H(x) = F(x) + x. F(x), which is generally referred t
 Shortuct connections or Skip Connections are used to achieve this. In this case, these shortcut connections are used to perform the identity mapping. As evident from the figure, no extra parameter is added and thus the computational complexity isn't affected either. This network can be trained using Stochastic Gradient Descent with backpropagation. 
 
 ## Architecture of the full network
+![Figure 4](./images/fig4.png "Fig 4. ResNet: Architecture")
+<p align="center">Fig 4. ResNet: Architecture</p>
+
+The architecture of the complete network is given in the above figure. As mentioned earlier, a lot of experimentation has been done by the authors and they propose the architectures, including the residual blocks, for the whole network with 18, 34, 50, 101 and 152 layers.
+
+One interesting point to note here are the bottleneck blocks, which start and end with 1X1 convolutions in deeper ResNets with 50, 101 and 152 layers. These bottleneck blocks are a variant of the residual blocks and are special due to the presence of these 1X1 convolution layers. 
+
+## 1X1 Convolutions
+1X1 convolutions have a special intuition: they are mainly used to increase or decrease the size of the input. 1X1 convolutions map each input pixel and its corresponding channels to an output pixel. 
+
+So, it does not change the height or width of the input. But, depending on the number of filters, it changes the number of channels. This can be used to increase or decrease the number of channels. The above figure shows the effect of 1X1 convolutions. 
+
+## Bottleneck Blocks
+Bottleneck blocks take advantage of 1X1 Convolutions. Quoting from the original paper, which is quite self explanatory: 
+
+``` 
+Because of concerns on the training time that we can afford, we modify the building block as a bottleneck design. For each residual function F, we use a stack of 3 layers instead of 2. The three layers
+are 1×1, 3×3, and 1×1 convolutions, where the 1×1 layers are responsible for reducing and then increasing (restoring) dimensions, leaving the 3×3 layer a bottleneck with smaller input/output dimensions. 
+```
+
+The figure above shows a bottleneck block. Deeper non-bottleneck ResNets show an increase in performance due to the increased depth, but they won't be as economical as the bottleneck blocks. 
+
