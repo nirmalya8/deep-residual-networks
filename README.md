@@ -62,6 +62,9 @@ One interesting point to note here are the bottleneck blocks, which start and en
 ## 1X1 Convolutions
 1X1 convolutions have a special intuition: they are mainly used to increase or decrease the size of the input. 1X1 convolutions map each input pixel and its corresponding channels to an output pixel. 
 
+![Figure 5](./images/fig5.png "Fig 5. 1X1 Convolutions")
+<p align="center">Fig 5. 1X1 Convolutions</p>
+
 So, it does not change the height or width of the input. But, depending on the number of filters, it changes the number of channels. This can be used to increase or decrease the number of channels. The above figure shows the effect of 1X1 convolutions. 
 
 ## Bottleneck Blocks
@@ -71,9 +74,12 @@ Bottleneck blocks take advantage of 1X1 Convolutions. Quoting from the original 
 >Because of concerns on the training time that we can afford, we modify the building block as a bottleneck design. For each residual function F, we use a stack of 3 layers instead of 2. The three layers
 are 1×1, 3×3, and 1×1 convolutions, where the 1×1 layers are responsible for reducing and then increasing (restoring) dimensions, leaving the 3×3 layer a bottleneck with smaller input/output dimensions. 
 
+![Figure 6](./images/fig6.png "Fig 6. Bottleneck Architecture")
+<p align="center">Fig 6. Bottleneck Architecture</p>
 
 The figure above shows a bottleneck block. Deeper non-bottleneck ResNets show an increase in performance due to the increased depth, but they won't be as economical as the bottleneck blocks. 
 
 ## Results
 This paper was one of the groundbreaking papers which set a lot of standards in the field of computer vision. As for results, it has a lot of accolades, one of which is winning the ImageNet Competition ILSVRC 2015 with an error of 3.57% on the test set. 
 
+It also managed to overfit the CIFAR-10 dataset. They also obtain a 28% relative improvement on the COCO object detection dataset.
