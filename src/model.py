@@ -53,5 +53,26 @@ and the softmax activation function.
 '''
 
 class ResNet(nn.Module):
-    def __init__(self,img_channels:int,num_layers:int,block:Type[ResidualBlock],num_classes:int=1000):
+    def __init__(self,img_channels:int,num_layers:int,block:Type[ResidualBlock],num_classes:int=10):
+        super(ResNet,self).__init__()
+        if num_layers==18:
+            layers = [2,2,2,2]
+            self.expansion = 1
 
+        self.in_channels = 64
+
+        self.conv1 = nn.Conv2d(in_channels = img_channels,out_channels=self.in_channels,kernel_size=7,stride=2,padding=3,bias=False)
+
+        self.bn1 = nn.BatchNorm2d(self.in_channels)
+        self.relu = nn.ReLU(inplace=True)
+        self.maxpool = nn.MaxPool2d(kernel_size=3,stride=2,padding=1)
+
+        self.layer1 = self._make_layer(block,64,layers[0])
+        self.layer2 = self._make_layer(block,128,layers[1],stride=2)
+        self.layer3 = self._make_layer(block,256,layers[2],stride=2)
+        self.layer4 = self._make_layer(block,512,layers[3],stride=2)
+        
+        self.avgpool = nn.AdaptiveAvgPool2d((1,1))
+        self.fc = nn.Linear(512*self.expansion,num_classes)
+
+    
