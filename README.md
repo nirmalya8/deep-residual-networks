@@ -1,4 +1,6 @@
 # Deep Residual Networks: Notes and Implementation 
+This repository contains the explanation and code for ResNet or Deep Residual Networks. The code is contained in the `src` folder.
+
 This readme contains notes and my intuitions of the paper "Deep Residual Learning for Image Recognition" by Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun of Microsoft Research.
 
 This link redirects to the [original paper](https://arxiv.org/pdf/1512.03385.pdf). 
